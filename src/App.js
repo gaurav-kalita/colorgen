@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Svg from './component/svg'
+import {randomNumbers, decToHex} from './utils';
+
+
+const App = () => {
+    const [number, setNumber] = useState('');
+    const [hexArr, setHexArr] = useState([]);
+    const [ranN, setRanN] = useState([])
+  
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        let ranNum = randomNumbers(number);
+        setRanN(ranNum);
+        let hex = decToHex(ranN);
+        setHexArr(hex);
+    }
+    
+
+    const getHexCodes = (e) =>{
+        setNumber(e.target.value)
+    }
+
+
+    return(
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input type="number" value={number} required onChange={getHexCodes}/>
+                <input type="submit" value="load"/>
+            </form>
+            {hexArr.map((item) => {
+                return (<Svg  hexArr="hexArr"/>)}
+            )}
+        </div>
+    );
 }
 
 export default App;
