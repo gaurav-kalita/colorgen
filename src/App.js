@@ -3,7 +3,6 @@ import React, {useState} from 'react';
 import Svg from './component/svg'
 import {randomNumbers, decToHex} from './utils';
 
-
 const App = () => {
     const [number, setNumber] = useState('');
     const [hexArr, setHexArr] = useState([]);
@@ -22,6 +21,11 @@ const App = () => {
         setNumber(e.target.value)
     }
 
+    const squares = hexArr.map((item) =>{
+        let sq = []
+        sq.push(<Svg  item={item}/>)
+        return sq
+    })
 
     return(
         <div>
@@ -29,9 +33,7 @@ const App = () => {
                 <input type="number" value={number} required onChange={getHexCodes}/>
                 <input type="submit" value="load"/>
             </form>
-            {hexArr.map((item) => {
-                return (<Svg  hexArr="hexArr"/>)}
-            )}
+            {squares}
         </div>
     );
 }
